@@ -1,0 +1,475 @@
+// =====================================================
+// SMART WATER ANALYTICS UNIAJC
+// Base de Datos Inteligente
+// =====================================================
+
+const smartWaterDB = {
+
+    // =====================================================
+    // 1. INSTITUCIÓN
+    // =====================================================
+
+    institucion: {
+        nombre: "UNIAJC Sede Sur",
+        ubicacion: "Cali - Valle del Cauca",
+        extensionM2: 38775.88,
+
+        poblacion: {
+            estudiantes: 5394,
+            docentes: 250,
+            administrativos: 120,
+            totalUsuarios: 5764
+        },
+
+        crecimientoPoblacional: {
+            anual: 20.34,
+            proyeccion2030: 9000
+        }
+    },
+
+    // =====================================================
+    // 2. PTAP
+    // =====================================================
+
+    ptap: {
+
+        id: "PTAP-001",
+
+        fuenteCaptacion: {
+            tipo: "Aljibes",
+            cantidad: 2,
+            origen: "Cuenca Rio Pance",
+            caudalPromedio: 113.56
+        },
+
+        filtracion: [
+            "Grava",
+            "Arena",
+            "Antracita",
+            "Carbon Activo"
+        ],
+
+        capacidadTanques: [
+            {
+                id: "TK-001",
+                capacidad: 32000
+            },
+            {
+                id: "TK-002",
+                capacidad: 32000
+            },
+            {
+                id: "TK-003",
+                capacidad: 20000,
+                tipo: "Reserva Estratégica"
+            }
+        ],
+
+        calidadAgua: {
+
+            ph: 7.1,
+            turbidez: 1.3,
+            cloroResidual: 0.7,
+            temperatura: 24,
+            conductividad: 145
+        },
+
+        estado: "Operativa"
+    },
+
+    // =====================================================
+    // 3. PTAR
+    // =====================================================
+
+    ptar: {
+
+        disponible: false,
+
+        problemaAmbiental: {
+            impactoRioPance: true,
+            impactoRioCauca: true
+        },
+
+        normativa: {
+            resolucion: "0631 de 2015",
+            cumplimiento: false
+        },
+
+        contaminantes: {
+
+            dbo: null,
+            dqo: null,
+            solidosSuspendidos: null
+        }
+    },
+
+    // =====================================================
+    // 4. CONSUMO GENERAL
+    // =====================================================
+
+    consumo: {
+
+        consumoTotalDia: 45367,
+
+        litrosPorEstudiante: 14.04,
+
+        litrosPorUsuario: 13.39,
+
+        distribucionUso: {
+
+            aseoPersonal: 69.73,
+
+            riego: 12,
+
+            laboratorios: 8,
+
+            cafeterias: 5,
+
+            limpieza: 5.27
+        }
+    },
+
+    // =====================================================
+    // 5. DISTRIBUCIÓN HIDRÁULICA
+    // =====================================================
+
+    redHidraulica: {
+
+        bloques: [
+
+            {
+                nombre: "Bloque A",
+
+                mecanismos: [
+                    "Orinales",
+                    "Sanitarios",
+                    "Lavamanos",
+                    "Aspersores",
+                    "Grifos",
+                    "Duchas"
+                ]
+            },
+
+            {
+                nombre: "Bloque Alameda"
+            }
+        ]
+    },
+
+    // =====================================================
+    // 6. SENSORES IOT
+    // =====================================================
+
+    sensores: [
+
+        {
+            id: "SEN-001",
+
+            tipo: "Ultrasonico",
+
+            modelo: "JSN-SR04T",
+
+            ubicacion: "Tanque 1",
+
+            funcion: "Medir Nivel Agua",
+
+            conectadoA: "ESP32",
+
+            tiempoReal: true
+        },
+
+        {
+            id: "SEN-002",
+
+            tipo: "Caudalimetro",
+
+            ubicacion: "Bloque A",
+
+            flujoActual: 120,
+
+            unidad: "L/min"
+        },
+
+        {
+            id: "SEN-003",
+
+            tipo: "Humedad Suelo",
+
+            ubicacion: "Cancha",
+
+            humedad: 75
+        }
+    ],
+
+    // =====================================================
+    // 7. TELEMETRÍA
+    // =====================================================
+
+    telemetria: {
+
+        controlador: "ESP32",
+
+        protocolo: "HTTP REST TLS",
+
+        nube: "Firebase",
+
+        almacenamientoOffline: {
+
+            disponible: true,
+
+            memoria: "4MB LittleFS",
+
+            respaldoDias: 10
+        }
+    },
+
+    // =====================================================
+    // 8. ENERGÍA SOLAR
+    // =====================================================
+
+    energiaSolar: {
+
+        panelSolar: {
+
+            potencia: "10W",
+
+            voltaje: "12V"
+        },
+
+        bateria: {
+
+            tipo: "Gel",
+
+            voltaje: "12V",
+
+            amperaje: "7A",
+
+            nivelActual: 87,
+
+            cargando: true
+        },
+
+        controladorPWM: {
+
+            amperaje: "10A"
+        }
+    },
+
+    // =====================================================
+    // 9. AUTOMATIZACIÓN
+    // =====================================================
+
+    automatizacion: {
+
+        llenadoAutomatico: {
+
+            activo: true,
+
+            condicionActivacion: "Menor al 50%",
+
+            sistema: "Llenado por presión"
+        },
+
+        riegoInteligente: {
+
+            horario: "Madrugada",
+
+            controladoPorHumedad: true,
+
+            tipos: [
+                "Aspersores",
+                "Goteo",
+                "Microaspersión"
+            ]
+        }
+    },
+
+    // =====================================================
+    // 10. ALERTAS
+    // =====================================================
+
+    alertas: [
+
+        {
+            tipo: "Nivel Bajo",
+
+            prioridad: "Alta",
+
+            accion: "Activar llenado automático"
+        },
+
+        {
+            tipo: "Fuga Detectada",
+
+            prioridad: "Crítica",
+
+            accion: "Notificar Operario"
+        }
+    ],
+
+    // =====================================================
+    // 11. BOT TELEGRAM
+    // =====================================================
+
+    telegramBot: {
+
+        activo: true,
+
+        funciones: [
+
+            "Enviar Alertas",
+
+            "Estado Tanques",
+
+            "Notificaciones",
+
+            "Consumo Diario"
+        ]
+    },
+
+    // =====================================================
+    // 12. IA ANALÍTICA
+    // =====================================================
+
+    inteligenciaArtificial: {
+
+        modeloIA: "Gemini 2.5 Flash",
+
+        funciones: [
+
+            "Predicción de consumo",
+
+            "Análisis de bombas",
+
+            "Detección anomalías",
+
+            "Generación reportes",
+
+            "Vida útil equipos"
+        ]
+    },
+
+    // =====================================================
+    // 13. FINANZAS Y ROI
+    // =====================================================
+
+    finanzas: {
+
+        inversionInicial: 7350000,
+
+        ahorroMensualEnergia: 190000,
+
+        retornoInversionMeses: 38,
+
+        costos: {
+
+            esp32: 145000,
+
+            sensores: 330000,
+
+            electrovalvulas: 225000,
+
+            riego: 150000,
+
+            tanqueReserva: 6500000
+        }
+    },
+
+    // =====================================================
+    // 14. USUARIOS Y ROLES
+    // =====================================================
+
+    usuarios: [
+
+        {
+            rol: "Gerencia",
+
+            acceso: [
+                "Dashboard General",
+                "Finanzas",
+                "Reportes"
+            ]
+        },
+
+        {
+            rol: "Analista Datos",
+
+            acceso: [
+                "Graficas",
+                "Consumos",
+                "IA"
+            ]
+        },
+
+        {
+            rol: "Operario",
+
+            acceso: [
+                "Tanques",
+                "Alertas",
+                "Llenado"
+            ]
+        },
+
+        {
+            rol: "Estudiante",
+
+            acceso: [
+                "Graficas Educativas",
+                "Consumo Agua"
+            ]
+        }
+    ],
+
+    // =====================================================
+    // 15. DASHBOARD
+    // =====================================================
+
+    dashboard: {
+
+        principal: {
+
+            tiempoReal: true,
+
+            monitoreoTanques: true,
+
+            monitoreoBateria: true,
+
+            monitoreoBombas: true
+        },
+
+        operarios: {
+
+            simple: true,
+
+            soloDatosCriticos: true
+        }
+    },
+
+    // =====================================================
+    // 16. SOSTENIBILIDAD
+    // =====================================================
+
+    sostenibilidad: {
+
+        ods: [
+
+            "ODS 6",
+
+            "ODS 7",
+
+            "ODS 11"
+        ],
+
+        ahorroAguaEstimado: 32,
+
+        continuidadAcademica: true
+    }
+};
+
+
+// =====================================================
+// EXPORTAR
+// =====================================================
+
+module.exports = smartWaterDB;
